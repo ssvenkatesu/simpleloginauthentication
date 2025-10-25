@@ -3,17 +3,22 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": ["authentication", "login", "nodejs", "express", "mysql"],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "A modern login authentication system with Node.js, Express, and MySQL",
   "dependencies": {
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
-    "express": "^4.19.2",
+    "express": "^4.21.2",
     "express-session": "^1.18.0",
     "mysql2": "^3.11.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
   }
 }

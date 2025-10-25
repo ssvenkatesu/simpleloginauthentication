@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Authentication System</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="auth-header">
+            <h1>Create Account</h1>
+            <p>Join us today</p>
+        </div>
+        
+        <form action="/register" method="post" class="auth-form">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Choose a username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Create a strong password" required>
+            </div>
+            <button type="submit" class="auth-btn">
+                <span>Create Account</span>
+            </button>
+        </form>
+
+        <div class="auth-footer">
+            <p>Already have an account? <a href="/login">Sign in here</a></p>
+        </div>
+    </div>
+
+    <script>
+        // Add loading state to form submission
+        document.querySelector('.auth-form').addEventListener('submit', function(e) {
+            const button = this.querySelector('button');
+            const originalText = button.innerHTML;
+            button.innerHTML = '<span class="loading"></span> Creating Account...';
+            button.disabled = true;
+        });
+
+        // Add focus effects
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.classList.add('focused');
+            });
+            input.addEventListener('blur', function() {
+                this.parentElement.classList.remove('focused');
+            });
+        });
+
+        // Password strength indicator
+        const passwordInput = document.getElementById('password');
+        passwordInput.addEventListener('input', function() {
+            const password = this.value;
+            const strength = getPasswordStrength(password);
+            updatePasswordStrength(strength);
+        });
+
+        function getPasswordStrength(password) {
+            let strength = 0;
+            if (password.length >= 8) strength++;
+            if (/[a-z]/.test(password)) strength++;
+            if (/[A-Z]/.test(password)) strength++;
+            if (/[0-9]/.test(password)) strength++;
+            if (/[^A-Za-z0-9]/.test(password)) strength++;
+            return strength;
+        }
+
+        function updatePasswordStrength(strength) {
+            // This could be enhanced with a visual strength indicator
+            console.log('Password strength:', strength);
+        }
+    </script>
+</body>
+</html>
